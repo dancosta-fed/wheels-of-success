@@ -1,10 +1,10 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
-const btnReset = document.getElementsByClassName('btn_reset');
+const btnReset = document.querySelector('.btn_reset');
+btnReset.addEventListener('click', (e)=> {overlay.style.display = "none";})
 const missed = 0;
 
-btnReset.addEventListener('click',  (e) => {overlay.style.display = "none"});
-
+// Random phrases
 let phrases = [
     'You can be better than this',
     'Hire me and see what happens',
@@ -13,4 +13,14 @@ let phrases = [
     'You are deserve success in life'
 ];
 
-console.log(btnReset);
+//Getting a random phrase Array
+function getRandomPhraseAsArray(arr){
+     let randomChoice = Math.floor(Math.random() * phrases.length);
+     let randomPhrase = phrase[randomChoice];
+     let splitPhrase = randomPhrase.split('');
+     return splitPhrase;
+} 
+
+const phraseArray = getRandomPhraseAsArray(phrases);
+
+console.log(getRandomPhraseAsArray);
