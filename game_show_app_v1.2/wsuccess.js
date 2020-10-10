@@ -15,12 +15,12 @@ let phrases = [
 
 //Getting a random phrase Array
 function getRandomPhraseAsArray(arr){
-     let randomChoice = Math.floor(Math.random() * phrases.length);
-     let randomPhrase = phrase[randomChoice];
+     let randomChoice = Math.floor(Math.random() * arr.length);
+     let randomPhrase = arr[randomChoice];
      let splitPhrase = randomPhrase.split('');
      return splitPhrase;
 } 
 
-const phraseArray = getRandomPhraseAsArray(phrases);
+const phraseArray = (getRandomPhraseAsArray(phrases));
 
-console.log(getRandomPhraseAsArray);
+console.log(getRandomPhraseAsArray(phrases));
