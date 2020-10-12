@@ -3,7 +3,7 @@ const phrase = document.getElementById('phrase');
 const btnReset = document.querySelector('.btn_reset');
 const overlay = document.getElementById('overlay');
 btnReset.addEventListener('click', (e)=> {overlay.style.display = "none";})
-const missed = 0;
+let missed = 0;
 
 // Random phrases
 let phrases = [
@@ -79,24 +79,63 @@ qwerty.addEventListener('click', (e)=>{
             liveHeart[0].className = ' ';
         }
     }
+    checkWin () // calling out the function at every click. Any click could be the winner 
 })
 
 //CheckWin Function
 function checkWin () {
 
-    let liLetter = document.classList.add('.letter');
-    let liShow = document.classList.add('.show');
+    let liLetter = document.querySelectorAll('.letter');
+    let liShow = document.querySelectorAll('.show');
 
     if (liLetter.length === liShow.length ){
         
         overlay.classList.add('win');
         overlay.querySelector('h2').textContent = 'YESS! Congrats...You WON!';
         overlay.style.display = "flex"; 
+        function winner() {
+            overlay.style.visibility = 'visible';
+            btn_reset.textContent = 'Try again';
+        }
+        resetTheGame ();
     }  
 
-    if (missed > 5){
-
+    if (missed > 4){
+        overlay.classList.add('lose');
+        overlay.querySelector('h2').textContent = "Dang it! You lost. Don't give up, though! :)";
+        overlay.style.display = "flex"; 
+        
+        function looser() {
+            overlay.style.visibility = 'visible';
+            btn_reset.textContent = 'Try again';
+        }
+        resetTheGame ();
     }
+    return
 }
 
+function resetTheGame() {
 
+   
+    let keyboardBttn = document.querySelectorAll('.keyrow button');
+    let liveHeart = document.querySelectorAll('.tries');
+   
+    
+    if (overlay.className === 'win' || 'lose'){
+        btnReset.textContent = 'Reset Game';
+    }
+
+    for (let i = 0; i < keyboardBttn.length; i++) {
+        keyboardBttn[i].className = '';
+        keyboardBttn[i].disabled = false;
+    }
+    
+    for (let j = 0; j < liveHeart.length; j++) {
+        liveHeart[j].className = 'tries';
+        liveHeart[j].src = "images/liveHeart.png";
+    }
+
+    missed = 0;
+}
+
+console.log();
