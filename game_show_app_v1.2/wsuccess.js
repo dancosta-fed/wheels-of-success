@@ -2,27 +2,28 @@ const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const btnReset = document.querySelector('.btn_reset');
 const overlay = document.getElementById('overlay');
+let hearts = document.querySelectorAll('#scoreboard ol li');
 btnReset.addEventListener('click', (e)=> {overlay.style.display = "none";})
 let missed = 0;
 
 // Random phrases
 let phrases = [
     'You can do this',
-    'Hire me and see what happens',
-    'Life is not about what is better than',
-    'Give me a chance to shine',
-    'You deserve success in life'
+    'Hire me now',
+    'Life is good',
+    'Coding is life',
+    'You are awesome'
 ];
 
 //Getting a random phrase Array
-function getRandomPhraseAsArray(arr){
+function getRandomPhrase(arr){
      let randomChoice = Math.floor(Math.random() * arr.length);
      let randomPhrase = arr[randomChoice];
      let splitPhrase = randomPhrase.split('');
      return splitPhrase;
 } 
 
-const phraseArray = (getRandomPhraseAsArray(phrases));
+let phraseArray = (getRandomPhrase(phrases));
 
 // function that loops through an array of characters
 function addPhraseToDisplay(){
@@ -106,12 +107,13 @@ function checkWin () {
 }
 
 function resetTheGame() {
-
-   
+    
     let keyboardBttn = document.querySelectorAll('.keyrow button');
     let liveHeart = document.querySelectorAll('.tries');
-   
+    let lostHeart = document.querySelectorAll('.tries img');
+    let ul = document.querySelector('#phrase ul');
     
+   
     if (overlay.className === 'win' || 'lose'){
         btnReset.textContent = 'Reset Game';
     }
@@ -121,12 +123,16 @@ function resetTheGame() {
         keyboardBttn[i].disabled = false;
     }
     
+    ul.innerHTML = '';
+    phraseArray = (getRandomPhrase(phrases));
+    addPhraseToDisplay();
+
     for (let j = 0; j < liveHeart.length; j++) {
-        liveHeart[j].className = 'tries';
-        liveHeart[j].src = "images/liveHeart.png";
+       let tries = document.querySelectorAll('.tries');
+       tries[j].style.display = 'inline';
     }
 
     missed = 0;
 }
 
-console.log();
+
