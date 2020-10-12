@@ -1,12 +1,13 @@
 const qwerty = document.getElementById('qwerty');
 const phrase = document.getElementById('phrase');
 const btnReset = document.querySelector('.btn_reset');
+const overlay = document.getElementById('overlay');
 btnReset.addEventListener('click', (e)=> {overlay.style.display = "none";})
 const missed = 0;
 
 // Random phrases
 let phrases = [
-    'You can be better than this',
+    'You can do this',
     'Hire me and see what happens',
     'Life is not about what is better than',
     'Give me a chance to shine',
@@ -50,10 +51,10 @@ const checkLetter = button => {
     let letters = document.querySelectorAll('.letter');
     let match = null;
     
-    for (let i = 0; i < checkLetter.length; i++){
+    for (let i = 0; i < letters.length; i++){
 
         if (button === letters[i].textContent.toLowerCase()) {
-           letters[i].className = 'show';
+           letters[i].className += ' show';
             match = letters[i].textContent;
         } 
     }     
@@ -73,10 +74,29 @@ qwerty.addEventListener('click', (e)=>{
         if (letterFound === null){
             let liveHeart = document.querySelectorAll('.tries');
             let lostHeart = document.querySelectorAll('.tries img');
+            missed++;
             lostHeart[0].src = "images/lostHeart.png";
             liveHeart[0].className = ' ';
         }
     }
 })
 
-console.log(); 
+//CheckWin Function
+function checkWin () {
+
+    let liLetter = document.classList.add('.letter');
+    let liShow = document.classList.add('.show');
+
+    if (liLetter.length === liShow.length ){
+        
+        overlay.classList.add('win');
+        overlay.querySelector('h2').textContent = 'YESS! Congrats...You WON!';
+        overlay.style.display = "flex"; 
+    }  
+
+    if (missed > 5){
+
+    }
+}
+
+
