@@ -93,10 +93,6 @@ function checkWin () {
         overlay.classList.add('win');
         overlay.querySelector('h2').textContent = 'YESS! Congrats...You WON!';
         overlay.style.display = "flex"; 
-        function winner() {
-            overlay.style.visibility = 'visible';
-            btn_reset.textContent = 'Try again';
-        }
         resetTheGame ();
     }  
 
@@ -104,11 +100,6 @@ function checkWin () {
         overlay.classList.add('lose');
         overlay.querySelector('h2').textContent = "Dang it! You lost. Don't give up, though! :)";
         overlay.style.display = "flex"; 
-        
-        function looser() {
-            overlay.style.visibility = 'visible';
-            btn_reset.textContent = 'Try again';
-        }
         resetTheGame ();
     }
     return
