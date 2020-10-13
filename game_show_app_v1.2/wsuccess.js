@@ -8,7 +8,7 @@ let missed = 0;
 
 // Random phrases
 let phrases = [
-    'You can do this',
+    'You can do anything',
     'Hire me now',
     'Life is good',
     'Coding is life',
@@ -72,12 +72,13 @@ qwerty.addEventListener('click', (e)=>{
         btnClicked.disabled = 'true';
 
         let letterFound = checkLetter(btnClicked.textContent);
+        
         if (letterFound === null){
             let liveHeart = document.querySelectorAll('.tries');
             let lostHeart = document.querySelectorAll('.tries img');
+            let tries = document.querySelectorAll('.tries img');
+            tries[missed].src = "images/lostHeart.png";
             missed++;
-            lostHeart[0].src = "images/lostHeart.png";
-            liveHeart[0].className = ' ';
         }
     }
     checkWin () // calling out the function at every click. Any click could be the winner 
@@ -94,6 +95,7 @@ function checkWin () {
         overlay.classList.add('win');
         overlay.querySelector('h2').textContent = 'YESS! Congrats...You WON!';
         overlay.style.display = "flex"; 
+        btnReset.textContent = "Play again"
         resetTheGame ();
     }  
 
@@ -101,38 +103,32 @@ function checkWin () {
         overlay.classList.add('lose');
         overlay.querySelector('h2').textContent = "Dang it! You lost. Don't give up, though! :)";
         overlay.style.display = "flex"; 
+        btnReset.textContent = "Play again"
         resetTheGame ();
     }
     return
 }
 
 function resetTheGame() {
-    
     let keyboardBttn = document.querySelectorAll('.keyrow button');
-    let liveHeart = document.querySelectorAll('.tries');
-    let lostHeart = document.querySelectorAll('.tries img');
+    let tries = document.querySelectorAll('#scoreboard img');
     let ul = document.querySelector('#phrase ul');
-    
-   
-    if (overlay.className === 'win' || 'lose'){
-        btnReset.textContent = 'Reset Game';
-    }
-
     for (let i = 0; i < keyboardBttn.length; i++) {
         keyboardBttn[i].className = '';
         keyboardBttn[i].disabled = false;
     }
-    
     ul.innerHTML = '';
     phraseArray = (getRandomPhrase(phrases));
-    addPhraseToDisplay();
-
-    for (let j = 0; j < liveHeart.length; j++) {
-       let tries = document.querySelectorAll('.tries');
-       tries[j].style.display = 'inline';
+    addPhraseToDisplay(phraseArray);
+    for (let j = 0; j < tries.length; j++) {
+       tries[j].src = 'images/liveHeart.png';
     }
-
     missed = 0;
 }
 
-
+btnReset.addEventListener('click', (e)=> {
+    overlay.style.display = "none";
+    if(btnReset.textContent === "Play again"){
+        resetTheGame();
+    }
+})
